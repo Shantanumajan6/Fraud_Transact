@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fraud Detection System</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #0f172a, #1e293b);
+    color: white;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 20px;
+    font-size: 26px;
+    letter-spacing: 2px;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 40px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #cbd5f5;
+}
+
+/* Form Container */
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+}
+
+/* Grid Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #22c55e;
+    color: white;
+    border: none;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #16a34a;
+}
+
+/* Result */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    font-size: 14px;
+    color: gray;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    🚨 Intelligent Fraud Detection System
+</header>
+
+<div class="hero">
+    <h1>Real-Time Transaction Monitoring</h1>
+    <p>Detect suspicious digital transactions instantly using AI</p>
+</div>
+
+<div class="container">
+
+<form action="/predict" method="POST">
+
+<div class="form-grid">
+
+<input type="number" step="any" name="step" placeholder="Step" required>
+
+<select name="type">
+    <option value="0">PAYMENT</option>
+    <option value="1">TRANSFER</option>
+    <option value="2">CASH_OUT</option>
+    <option value="3">DEBIT</option>
+</select>
+
+<input type="number" step="any" name="amount" placeholder="Amount" required>
+<input type="number" step="any" name="oldbalanceOrg" placeholder="Old Balance (Sender)" required>
+
+<input type="number" step="any" name="newbalanceOrig" placeholder="New Balance (Sender)" required>
+<input type="number" step="any" name="oldbalanceDest" placeholder="Old Balance (Receiver)" required>
+
+<input type="number" step="any" name="newbalanceDest" placeholder="New Balance (Receiver)" required>
+
+<select name="isFlaggedFraud">
+    <option value="0">Not Flagged</option>
+    <option value="1">Flagged</option>
+</select>
+
+</div>
+
+<button type="submit">🔍 Check Transaction</button>
+
+</form>
+
+{% if prediction_text %}
+<div class="result">
+    <h2>{{ prediction_text }}</h2>
+    <p>Fraud Probability: {{ probability }}%</p>
+</div>
+{% endif %}
+
+</div>
+
+<footer>
+    © 2026 Fraud Detection System | Built with ML + Flask
+</footer>
+
+</body>
+</html>
