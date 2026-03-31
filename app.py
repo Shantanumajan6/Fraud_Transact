@@ -4,7 +4,7 @@ import os
 import numpy as np
 
 app = Flask(__name__)
-
+Atharva patil
 # Load model
 model_path = 'fraud_model.pkl'
 
